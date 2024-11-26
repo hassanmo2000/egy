@@ -138,7 +138,11 @@
         status_code: 202
         return_content: true
       register: vm_creation
-
+      
+    - name: Debug UUID to ensure it's a string
+      debug:
+       msg: "UUID: {{ vm_creation.json.metadata.uuid }}, Type: {{ vm_creation.json.metadata.uuid | type_debug }}"
+    
     - name: Power on the VM
       uri:
         url: "https://192.168.39.39:9440/api/nutanix/v2.0/vms/{{ vm_creation.json.metadata.uuid | string }}/set_power_state/"
