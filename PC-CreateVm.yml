@@ -144,22 +144,26 @@
        msg: "UUID: {{ vm_creation.json.metadata.uuid }}, Type: {{ vm_creation.json.metadata.uuid | type_debug }}"
     
     - name: Power on the VM
-      uri:
-       url: "https://192.168.39.39:9440/api/nutanix/v3/vms/{{ vm_creation.json.metadata.uuid | string }}/set_power_state/"
-       user: "{{ prism_user }}"
-       password: "{{ prism_password }}"
-       method: POST
-       force_basic_auth: yes
-       validate_certs: no
-       headers:
-        Content-Type: application/json
-       body:
-         host_uuid: "{{ vm_creation.json.metadata.uuid | string }}"
-         transition: "ON"
-         uuid: "{{ vm_creation.json.metadata.uuid | string }}"
-       body_format: json  # Ensure this is set to `json`
-       return_content: true
-      register: poweron_vm
+  uri:
+    url: "https://192.168.39.39:9440/api/nutanix/v3/vms/{{ vm_creation.json.metadata.uuid | string }}/set_power_state/"
+    user: "{{ prism_user }}"
+    password: "{{ prism_password }}"
+    method: POST
+    force_basic_auth: yes
+    validate_certs: no
+    headers:
+      Content-Type: application/json
+    body: |
+      {
+        "host_uuid": "{{ vm_creation.json.metadata.uuid | string }}",
+        "transition": "ON",
+        "uuid": "{{ vm_creation.json.metadata.uuid | string }}"
+      }
+    body_format: json  # Ensure this is set to `json`
+    return_content: true
+  register: poweron_vm
+
+
 
     - name: Get VM Attributes
       uri:
