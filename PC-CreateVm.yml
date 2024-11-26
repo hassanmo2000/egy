@@ -157,8 +157,9 @@
           {
             "host_uuid": "{{ vm_creation.json.metadata.uuid | string }}",
             "transition": "ON",
-            "uuid": "{{ vm_creation.json.metadata.uuid | string }}"
+            "uuid": "{{ vm_creation.json.metadata.uuid | string }}
           }
+        body_format: json 
         return_content: true
       register: poweron_vm
 
