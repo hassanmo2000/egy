@@ -143,7 +143,7 @@
       debug:
        msg: "UUID: {{ vm_creation.json.metadata.uuid }}, Type: {{ vm_creation.json.metadata.uuid | type_debug }}"
     
-     - name: Power on the VM
+     -name: Power on the VM
        uri:
           url: "https://192.168.39.39:9440/api/nutanix/v3/vms/{{ vm_creation.json.metadata.uuid | string }}/set_power_state/"
           user: "{{ prism_user }}"
@@ -162,9 +162,6 @@
           body_format: json  # Ensure this is set to `json`
           return_content: true
         register: poweron_vm
-
-
-
 
     - name: Get VM Attributes
       uri:
