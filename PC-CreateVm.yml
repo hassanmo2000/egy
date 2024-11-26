@@ -151,9 +151,9 @@
           Content-Type: application/json
         body: |
           {
-            "host_uuid": "{{ vm_creation.json.metadata.uuid | string }}",
+            "host_uuid": "{{ vm_creation.json.metadata.uuid }}",
             "transition": "ON",
-            "uuid": "{{ vm_creation.json.metadata.uuid | string }}"
+            "uuid": "{{ vm_creation.json.metadata.uuid }}"
           }
         return_content: true
       register: poweron_vm
