@@ -11,7 +11,7 @@
     golden_image_name: "Windows 2019"
     subnet_name: "vlan39"
     cluster_name: "infra"
-    vm_name: "heka"
+    vm_name: "andrew"
     vm_cpu: 4
     vm_memory: 8
     network_uuid: "e1530106-3d95-4d13-a232-37d447d8f0ed"
