@@ -143,23 +143,4 @@
       debug:
        msg: "UUID: {{ vm_creation.json.metadata.uuid }}, Type: {{ vm_creation.json.metadata.uuid | type_debug }}"
     
-    - name: Get VM Attributes
-      uri:
-        url: "https://{{ prism }}:9440/api/nutanix/v3/vms/{{ vm_creation.json.metadata.uuid | string }}"
-        user: "{{ prism_user }}"
-        password: "{{ prism_password }}"
-        method: GET
-        force_basic_auth: yes
-        validate_certs: no
-        headers:
-          Content-Type: application/json
-        return_content: true
-      register: get_vm_attributes
-      retries: 10
-      delay: 60
-      until: get_vm_attributes.json.status.resources.nic_list[0].ip_endpoint_list[0].ip is defined
-
-    - name: Capture VM IP for subsequent workflow
-      ansible.builtin.set_stats:
-        data:
-          vm_ip: "{{ get_vm_attributes.json.status.resources.nic_list[0].ip_endpoint_list[0].ip }}"
+  
